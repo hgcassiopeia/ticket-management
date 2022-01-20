@@ -1,0 +1,11 @@
+{
+    "dependencies": {
+        "body-parser": "^1.19.1",
+        "express": "4.17.2",
+        "mongodb": "4.3.0",
+        "nodemon": "2.0.15"
+    },
+    "scripts": {
+        "start": "nodemon index.js"
+    }
+}

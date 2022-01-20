@@ -1,0 +1,39 @@
+version: '3'
+services:
+  mymongodb:
+    build: 
+      dockerfile: Dockerfile
+      context: ./mongodb
+    restart: always
+    networks:
+      - tms
+  mynodeapp:
+    depends_on:
+      - mymongodb
+    build: 
+      dockerfile: Dockerfile
+      context: ./nodejs
+    restart: always
+    networks:
+      - tms
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_USER: admin
+      DATABASE_PASSWORD: Welcome1
+      DATABASE_HOST: mymongodb
+  myvueapp:
+    depends_on:
+      - mymongodb
+      - mynodeapp
+    build: 
+      dockerfile: Dockerfile
+      context: ./frontend
+    ports:
+      - 8080:8080
+    restart: always
+    networks:
+      - tms
+
+networks:
+  tms:
